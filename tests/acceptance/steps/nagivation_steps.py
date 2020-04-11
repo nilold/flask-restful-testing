@@ -4,6 +4,7 @@ from selenium import webdriver
 from tests.acceptance.page_model.base_page import BasePage
 from tests.acceptance.page_model.blog_page import BlogPage
 from tests.acceptance.page_model.home_page import HomePage
+from tests.acceptance.page_model.new_post_page import NewPostPage
 
 use_step_matcher("re")
 
@@ -13,6 +14,8 @@ def get_page_by_id(driver, page_id) -> BasePage:
         return HomePage(driver)
     elif page_id == "blog-page":
         return BlogPage(driver)
+    elif page_id == "new post page":
+        return NewPostPage(driver)
 
     raise RuntimeError(f"There is no page called: {page_id}")
 

@@ -25,4 +25,4 @@ class BlogPage(BasePage):
 
     @property
     def posts(self):
-        return self.driver.find_element(*BlogPageLocators.POSTS)
+        return self.driver.find_elements(*BlogPageLocators.POSTS)
