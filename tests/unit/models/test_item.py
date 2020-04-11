@@ -2,7 +2,7 @@ from models.item import ItemModel
 from tests.unit.unit_base_test import UnitBaseTest
 
 
-class ItemModelTest(UnitBaseTest):
+class ItemTest(UnitBaseTest):
     def test_create_item(self):
         name = 'item_1'
         price = 12.34

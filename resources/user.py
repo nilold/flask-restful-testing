@@ -14,11 +14,11 @@ class UserRegister(Resource):
                         required=True,
                         help="This field cannot be left blank!")
 
-    def post(self, username):
-        if UserModel.find_by_username("username"):
-            return {'message': f"An user with username '{username}' already exists."}, 400
-
+    def post(self):
         data = self.parser.parse_args()
+        if UserModel.find_by_username(data['username']):
+            return {'message': f"An user with username '{data['username']}' already exists."}, 400
+
         user = UserModel(**data)
 
         try:
