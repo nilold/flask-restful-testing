@@ -1,20 +1,28 @@
 from behave import *
 from selenium import webdriver
 
+from tests.acceptance.page_model.base_page import BasePage
+from tests.acceptance.page_model.blog_page import BlogPage
+from tests.acceptance.page_model.home_page import HomePage
+
 use_step_matcher("re")
 
-pages = {
-    "homepage": "http://127.0.0.1:5000/",
-    "blog-page": "http://127.0.0.1:5000/blog"
-}
+
+def get_page_by_id(driver, page_id) -> BasePage:
+    if page_id == "homepage":
+        return HomePage(driver)
+    elif page_id == "blog-page":
+        return BlogPage(driver)
 
 
 @given('I am on the "(.*)"')
 def step_implementation(context, page):
-    context.browser = webdriver.Chrome("/Applications/chromedriver")  # lounches a chrome window
-    context.browser.get(pages[page])
+    context.driver = webdriver.Chrome("/Applications/chromedriver")  # lounches a chrome window
+    page = get_page_by_id(context.driver, page)
+    context.driver.get(page.url)
 
 
 @then('I am on the "(.*)"')
 def step_implementation(context, page):
-    assert context.browser.current_url == pages[page]
+    page = get_page_by_id(context.driver, page)
+    assert context.driver.current_url == page.url

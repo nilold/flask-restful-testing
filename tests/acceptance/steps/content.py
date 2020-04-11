@@ -1,15 +1,18 @@
 from behave import *
-from selenium.webdriver.common.by import By
+
+from tests.acceptance.page_model.base_page import BasePage
+from tests.acceptance.page_model.home_page import HomePage
 
 use_step_matcher("re")
 
 
 @then('There is a title shown on the page')
 def step_impl(context):
-    context.title_tag = context.browser.find_element(By.TAG_NAME, "h1")  # just an example of finding by tag
-    assert context.title_tag.is_displayed()
+    page = BasePage(context.driver)
+    assert page.title.is_displayed()
 
 
 @step('The title tag has content "(.*)"')
 def step_impl(context, content):
-    assert context.title_tag.text == content
+    page = BasePage(context.driver)
+    assert page.title.text == content
