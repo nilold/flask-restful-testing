@@ -24,6 +24,7 @@ They can be run with the pytest runner
 ```bash
 python -m pytest tests/
 ```
+There is also a .travis.yml configuration file, so it will run on [Travis CI](https://travis-ci.org) if you integrate the repo there.
 
 ### Acceptance tests
 These tests are used for [BDD](https://behave.readthedocs.io/en/latest/philosophy.html) and will test how the webpage 
