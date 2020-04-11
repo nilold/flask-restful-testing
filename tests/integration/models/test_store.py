@@ -29,6 +29,7 @@ class StoreModelIntegrationTest(BaseTest):
     def test_json(self):
         store = StoreModel("Test Store")
         expected = {
+            "id": None,
             "name": "Test Store",
             "items": []
         }
@@ -46,10 +47,11 @@ class StoreModelIntegrationTest(BaseTest):
             self.assertEqual(store.items.first().name, "My Item")
 
             expected_json = {
+                "id": 1,
                 "name": "Test Store",
                 "items": [
-                    {"name": "My Item", "price": 12}
+                    {"name": "My Item", "price": 12.0}
                 ]
             }
 
-            self.assertEqual(expected_json, store.json())
+            self.assertDictEqual(expected_json, store.json())
