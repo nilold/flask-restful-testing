@@ -15,6 +15,8 @@ class BaseTest(TestCase):
     @classmethod
     def setUpClass(cls) -> None:
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///'
+        app.config['DEBUG'] = False  # flask does not like init_app after a request, when DEBUG mode is on
+        app.config['PROPAGATE_EXCEPTIONS'] = True
         with app.app_context():
             db.init_app(app)
 
