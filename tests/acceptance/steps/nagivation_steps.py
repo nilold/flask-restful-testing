@@ -14,15 +14,17 @@ def get_page_by_id(driver, page_id) -> BasePage:
     elif page_id == "blog-page":
         return BlogPage(driver)
 
+    raise RuntimeError(f"There is no page called: {page_id}")
+
 
 @given('I am on the "(.*)"')
-def step_implementation(context, page):
+def step_implementation(context, page_id):
     context.driver = webdriver.Chrome("/Applications/chromedriver")  # lounches a chrome window
-    page = get_page_by_id(context.driver, page)
+    page = get_page_by_id(context.driver, page_id)
     context.driver.get(page.url)
 
 
 @then('I am on the "(.*)"')
-def step_implementation(context, page):
-    page = get_page_by_id(context.driver, page)
+def step_implementation(context, page_id):
+    page = get_page_by_id(context.driver, page_id)
     assert context.driver.current_url == page.url

@@ -32,7 +32,10 @@ def auth_error_handler(err):
     return jsonify({"message": "Could not authorize user. Include authorization header."}), 401
 
 
-posts = []
+posts = [{
+            'title': "My Post - By Nilo Neto",
+            'content': "This is the post content. I know, not great."
+        }]
 
 
 @app.route('/')
